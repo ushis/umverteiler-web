@@ -1,0 +1,27 @@
+language: go
+
+go:
+  - '1.12'
+
+env:
+  - GOOS=linux GOARCH=amd64
+
+before_install:
+  - go get github.com/gobuffalo/packr/packr
+  - go get -v -d -t .
+  - gem install bundler
+  - bundle install --without guard
+  - yarn install
+
+script:
+  - make
+
+deploy:
+  provider: releases
+  skip_cleanup: true
+  api_key:
+    secure: YPN0BEDsWkrsSnkLjnkV4By8OFq7ghyw8iYMevuT4sslKgzgeXHT/uEGN7zesBAewLUd8B8RwvGIgGuaaYRE5kyzQt9e8HBfi8d7zmEniV7QUKNySRnP++VBz4ZTAeMfufxeOFmIvDIkUnj8NXshlFCPw2T84+ebb/Yq4dYG/Yu/QDsJEAmUnvgqVMDAEgBZYsbLegJ90mopbSy0I1ZGZ+ai1h55KKWTC71QNAzPYtZMcgGaY16GaUz1qSqz/7Zf1a+AvI/BWoM0lgVWggD0ouMKz0vvJ/xqtmL/2r0KFzoQAZAcVKPLTLQDzgkuJJL3Nmxy4WPDUsOP3tOkQjskUymaJZ4UfTCdGQQRJjnWPfHADdIUqMDrk36f2z1ldAxgnE5SW39UoRTrLy4veydS7QCQ9DTZzp3wetv2iCRxVyTxYJpyF0yC3srJOJ3s9qif8GXPufpWlvIgfDP9dHQoaxolwtqxleqo8TVYqe6Jwz7ui9jzWiL+tRKU7CQHdZN+8jJ/Z6JkxNZDuM4CAFFaQ7swIcg5bZGXNAL8u1mdZadAsQLMikosm/EMSg16Av4NABRGY1EERHdmy3PfMKXCm9GV0Jv1h6LosPPvrJO/GEGEDh0nbAhQxRRdQAyISvhlrNiMyHgQ8pnO3molscMIY5CY9N4qytU2Fu1kj5VSQfQ=
+  file: umverteiler-web
+  on:
+    repo: ushis/umverteiler-web
+    tags: true

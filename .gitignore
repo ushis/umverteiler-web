@@ -1,0 +1,10 @@
+# binaries
+umverteiler-web
+static/*
+!static/.keep
+
+# tempfiles
+*-packr.go
+.sass-cache
+node_modules
+*.csv

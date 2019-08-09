@@ -1,0 +1,194 @@
+doctype html
+html
+  head
+    meta charset='utf-8'
+    meta name='viewport' content='width=device-width, initial-scale=1'
+    title Umverteiler
+    link href='./style.css' rel='stylesheet'
+    script defer='true' src='./site.js'
+  body
+    .navbar.has-shadow.is-spaced
+      .container
+        .navbar-brand
+          a.navbar-item href='/'
+            img src='logo.png' width='121' height='28'
+          a.navbar-burger.burger href='#' data-toggle-class='is-active' data-toggle-class-target='#navbar-menu'
+            span
+            span
+            span
+        .navbar-menu id='navbar-menu'
+          .navbar-start
+            a.navbar-item href='#how-to'
+              span.icon.has-text-info
+                i.fas.fa-book
+              span How To
+            a.navbar-item href='#caveats'
+              span.icon.has-text-warning
+                i.fas.fa-exclamation-triangle
+              span Einschränkungen
+            a.navbar-item href='#finance'
+              span.icon.has-text-danger
+                i.fas.fa-comment-dollar
+              span Finanzen
+          .navbar-end
+            .navbar-item
+              .field
+                .control
+                  form action='https://www.paypal.com/cgi-bin/webscr' method='post'
+                    input type='hidden' name='cmd' value='_s-xclick'
+                    input type='hidden' name='notify_url' value='https://umverteiler.honkgong.info/api/ipn'
+                    input type='hidden' name='hosted_button_id' value='9JCS9AL9ANNWQ'
+                    button.button.is-danger.has-text-weight-bold type='submit' name='submit'
+                      | Spenden
+
+    .section
+      .container
+        .columns
+          .column.is-9-desktop.content
+            h2 id='how-to'
+              | How To Umverteiler
+
+            p
+              | Auf dem Umverteiler kannst Du Möbel, Bücher, Autos, Werkzeuge,
+                Tipps und Tricks fürs tägliche Leben, Mitfahrgelegenheiten,
+                Haustiere, Reisebegleitung - also eigentlich alles - verschenken,
+                verkaufen, tauschen, anbieten, ver- und ausborgen, also vielseitig
+                UMVERTEILEN ohne umständliches Rumfragen.
+
+            p
+              | Dafür gibt es ein paar Abmachungen:
+
+            h3
+              | 1. Präziser Betreff!
+
+            p
+              | Der Betreff sollte aussagen, was Du loswerden oder was Du bekommen
+                willst. Bei an den Umverteiler weitergeleiteten Emails also den
+                Betreff überprüfen und ggf. ändern.
+
+            p
+              | Zum Beispiel so:
+
+            ul
+              li
+                | "Verschenke: Frigga Haug: Selbstveränderung und Veränderung der
+                  Umstände"
+              li
+                | "Verkaufe: Katzenbilder"
+              li
+                | "Biete/Suche: Knackige Essiggurken"
+              li
+                | "Gesucht zum Ausborgen: Pferd"
+              li
+                | "Suche: Reisetipps für..."
+
+            p
+              | Eigentlich soll keine Veranstaltungswerbung über den Verteiler
+                verschickt werden, aber wer es nicht lassen kann, dann bitte:
+
+            ul
+              li
+                | "Veranstaltung: Theater/Film/Vortrag/Lesung..."
+
+
+            h3
+              | 2. Sharing And Caring
+
+            p
+              | Halte den Politkram und Veranstaltungshinweise möglichst raus.
+                Der Umverteiler ist nicht verschlüsselt! Außerdem gibt es dafür
+                auch andere Verteiler.
+
+            h3
+              | 3. Aufnahmepolitics
+
+            p
+              | Neue Leute werden von Leuten, die schon auf der Liste sind
+                vorgeschlagen, d.h. DU schickst die aufzunehmende Emailadresse an
+                die Adminadresse des Umverteilers. Sie steht unter jeder Email,
+                die über den Verteiler geht!
+
+            p
+              | Der Gedanke dahinter: Alle sollen sich dafür verantwortlich
+                fühlen, was über den Verteiler kommt.
+
+            p
+              | Alle anderen Anfrageformen (Adminadresse weitergeben, Emailadresse
+                über den Verteiler schicken, ...) werden ignoriert, auch weil das
+                einfach zu viel Arbeit ist, denn:
+
+            h3
+              | 4. 1000 Emails!
+
+            p
+              | Der Umverteiler zählt nun um die 1000 AbonnentInnen!! Bedenke also:
+
+            ol
+              li
+                | Wenn du 1 Email verschickst, verschickst du eigentlich 1000!
+              li
+                | Du bist eine von 1000 Personen, die sich mit Fragen und
+                  Problemen an die Adminadresse wendet und dort arbeiten in ihrer
+                  Freizeit, unbezahlt: 2 Personen. Deshalb braucht das manchmal
+                  einen kleinen Moment.
+
+            h3
+              | 5. Mayday Payday
+
+            p
+              | Ab und an müssen wir unsere Servermiete zahlen. Dann wenden wir
+                uns an euch und fragen nach einer kleinen Spende.
+
+            h3
+              | 6. Adressen & Links
+
+            ul
+              li
+                | Email an die Liste:
+                a< href='mailto:umverteiler@lists.honkgong.info'
+                  | umverteiler@lists.honkgong.info
+
+              li
+                | Probleme, Anfragen, etc.:
+                a< href='mailto:umverteiler-owner@lists.honkgong.info'
+                  | umverteiler-owner@lists.honkgong.info
+
+              li
+                | Abmelden:
+                a< href='mailto:umverteiler-leave@lists.honkgong.info'
+                  | umverteiler-leave@lists.honkgong.info
+
+            p
+              | Auf der
+              a<> href='https://lists.honkgong.info/accounts/login/'
+                | Weboberfläche der Listensoftware
+              | könnt ihr euch auch einen Account anlegen und eure Einstellungen
+                selbst bearbeiten.
+
+            h2 id='caveats'
+              | Einschränkungen
+
+            h2 id='finance'
+              | Finanzen
+
+          .column.is-3.is-hidden-touch
+            .card
+              .card-header
+                .card-header-title
+                  | Kontostand
+                a.card-header-icon href="#finance" title="Finanzen"
+                  span.icon
+                    i.fas.fa-question-circle
+
+              .card-content data-balance-meter='/api/balance'
+                p
+                  span.current 0
+                  | € von 480€
+
+                progress.progress value=0 max=480
+
+                p
+                  | Der Umverteiler ist für
+                  span.period<> data-fixed-costs=20 0
+                  | Monate finanziert.
+
