@@ -45,8 +45,8 @@ html
       .container
         .columns
           .column.is-9-desktop.content
-            h2 id='how-to'
-              | How To Umverteiler
+            h1
+              | Der Umverteiler
 
             p
               | Auf dem Umverteiler kannst Du Möbel, Bücher, Autos, Werkzeuge,
@@ -57,6 +57,9 @@ html
 
             p
               | Dafür gibt es ein paar Abmachungen:
+
+            h2 id='how-to'
+              | How To Umverteiler
 
             h3
               | 1. Präziser Betreff!
@@ -133,14 +136,7 @@ html
                   einen kleinen Moment.
 
             h3
-              | 5. Mayday Payday
-
-            p
-              | Ab und an müssen wir unsere Servermiete zahlen. Dann wenden wir
-                uns an euch und fragen nach einer kleinen Spende.
-
-            h3
-              | 6. Adressen & Links
+              | 5. Adressen & Links
 
             ul
               li
@@ -171,6 +167,55 @@ html
             h2 id='finance'
               | Finanzen
 
+            p
+              | Das Betreiben des Umverteilers kostet Geld. Wir zahlen im
+                Moment 20€ pro Monat Servermiete. Um werbefrei zu bleiben und
+                nicht gezwungen zu sein eure Emailadressen an schmierige
+                Spambots zu verschachern, brauchen wir (inklusives Wir!)
+                regelmäßig Money.
+
+            p
+              | Ziel ist es, die Finazierung der nächsten 2 Jahre zu sichern.
+                Wenn die Knete nicht einmal mehr für 1 Jahr reicht,
+                werden wir langsam unruhig. Bei weniger als 6 Monaten, fangen
+                wir an unser Privatvermögen gegen Rubbellose einzutauschen.
+
+            p
+              | Glücklicherweise können wir alle jederzeit auf diese Website
+                kommen, den aktuellen Kontostand des Umverteilers einsehen und
+                hin und wieder mal auf den großen roten Spenden-Button drücken.
+
+            p
+              | So kann gespendet werden:
+
+            ul
+              li
+                | Hinter dem Spenden-Button verbirgt sich ein PayPal-Formular.
+                  Dort könnt ihr mit eurem PayPal-Konto oder Kreditkarte
+                  spenden. Beachtet bitte, dass dieser Service Gebühren kostet.
+                  Kleine Spenden sind verhältnismäßig teurer als große Spenden.
+                  Also lieber einmal groß, statt ganz oft klein spenden.
+              li
+                | Ihr könnt auch das Formular umgehen und direkt via PayPal
+                  Geld senden an:
+                a.is-nowrap<> href='mailto:donate+umverteiler@honkgong.info'
+                  | donate+umverteiler@honkgong.info
+
+              li
+                | Bargeldspenden können bei vereenz und ushi abgegeben werden.
+                  Wer nicht weiß, wo wir anzutreffen sind, kann das mit einer
+                  Anfrage an
+                a.is-nowrap<> href='mailto:umverteiler-owner@lists.honkgong.info'
+                  | umverteiler-owner@lists.honkgong.info
+                | herausfinden.
+
+            form.is-hidden-mobile action='https://www.paypal.com/cgi-bin/webscr' method='post'
+              input type='hidden' name='cmd' value='_s-xclick'
+              input type='hidden' name='notify_url' value='https://umverteiler.honkgong.info/api/ipn'
+              input type='hidden' name='hosted_button_id' value='9JCS9AL9ANNWQ'
+              button.button.is-danger.has-text-weight-bold type='submit' name='submit'
+                | Spenden
+
           .column.is-3
             .card
               .card-header
@@ -192,3 +237,9 @@ html
                   span.period<> data-fixed-costs=20 0
                   | Monate finanziert.
 
+            form.is-hidden-tablet action='https://www.paypal.com/cgi-bin/webscr' method='post'
+              input type='hidden' name='cmd' value='_s-xclick'
+              input type='hidden' name='notify_url' value='https://umverteiler.honkgong.info/api/ipn'
+              input type='hidden' name='hosted_button_id' value='9JCS9AL9ANNWQ'
+              button.button.is-danger.has-text-weight-bold type='submit' name='submit'
+                | Spenden
