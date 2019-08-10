@@ -147,12 +147,18 @@ func (h ApiHandler) getBalance(w http.ResponseWriter, req *http.Request) {
 func (h ApiHandler) postTransaction(w http.ResponseWriter, req *http.Request) {
 	tx := Transaction{}
 
-	if json.NewDecoder(req.Body).Decode(&tx) != nil || tx.Amount == 0.0 {
+	if json.NewDecoder(req.Body).Decode(&tx) != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	tx.Comment = strings.TrimSpace(tx.Comment)
+
+	if tx.Amount == 0.0 || tx.Comment == "" {
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
 
-	if err := h.db.AppendTransaction(tx); err != nil {
+	if err := h.db.Append(tx); err != nil {
 		h.logger.Println("could not save transaction:", err)
 		w.WriteHeader(http.StatusInternalServerError)
 		return
@@ -176,18 +182,30 @@ func (h ApiHandler) handleIpn(err error, n *ipn.Notification) {
 		h.logger.Println("ipn failed: bad currency:", n.Currency)
 		return
 	}
-	tx := Transaction{Amount: n.Gross, Date: *n.PaymentDate.Time}
 
 	if n.TestIPN {
-		h.logger.Println("ipn test: not saving transaction:", tx)
+		h.logger.Println("ipn test: not saving transaction")
 		return
 	}
 
-	if err := h.db.AppendTransaction(tx); err != nil {
-		h.logger.Println("could not save transaction:", err)
+	txGross := Transaction{
+		Amount:  n.Gross,
+		Date:    *n.PaymentDate.Time,
+		Comment: "Paypal Spende",
+	}
+
+	txFee := Transaction{
+		Amount:  -n.Fee,
+		Date:    *n.PaymentDate.Time,
+		Comment: "Paypal Gebühr",
+	}
+
+	if err := h.db.Append(txGross, txFee); err != nil {
+		h.logger.Println("could not save transactions:", err)
 		return
 	}
-	h.logger.Println("append transaction:", tx)
+	h.logger.Println("append transaction:", txGross)
+	h.logger.Println("append transaction:", txFee)
 }
 
 type DB struct {
@@ -197,12 +215,13 @@ type DB struct {
 }
 
 type Transaction struct {
-	Amount float64   `json:"amount"`
-	Date   time.Time `json:"date"`
+	Amount  float64   `json:"amount"`
+	Date    time.Time `json:"date"`
+	Comment string    `json:"comment"`
 }
 
 func (tx Transaction) String() string {
-	return fmt.Sprintf("%f (%s)", tx.Amount, tx.Date)
+	return fmt.Sprintf("%f (%s, %s)", tx.Amount, tx.Date, tx.Comment)
 }
 
 type Balance struct {
@@ -222,7 +241,7 @@ func (db *DB) Balance() Balance {
 	return db.balance
 }
 
-func (db *DB) AppendTransaction(tx Transaction) error {
+func (db *DB) Append(txs ...Transaction) error {
 	db.mutex.Lock()
 	defer db.mutex.Unlock()
 
@@ -233,22 +252,23 @@ func (db *DB) AppendTransaction(tx Transaction) error {
 	}
 	defer f.Close()
 
-	row := []string{
-		strconv.FormatFloat(tx.Amount, 'f', -1, 64),
-		tx.Date.Format(time.RFC3339),
-	}
 	w := csv.NewWriter(f)
 
-	if err := w.Write(row); err != nil {
-		return err
+	for _, tx := range txs {
+		row := []string{
+			strconv.FormatFloat(tx.Amount, 'f', -1, 64),
+			tx.Date.Format(time.RFC3339),
+			tx.Comment,
+		}
+
+		if err := w.Write(row); err != nil {
+			return err
+		}
+		db.balance.Balance += tx.Amount
 	}
 	w.Flush()
 
-	if err := w.Error(); err != nil {
-		return err
-	}
-	db.balance.Balance += tx.Amount
-	return nil
+	return w.Error()
 }
 
 func (db *DB) load() error {
@@ -277,7 +297,7 @@ func (db *DB) load() error {
 			return err
 		}
 
-		if len(row) != 2 {
+		if len(row) != 3 {
 			return fmt.Errorf("invalid format: number of columns: %d", len(row))
 		}
 		amount, err := strconv.ParseFloat(row[0], 64)
