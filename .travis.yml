@@ -4,7 +4,9 @@ go:
   - '1.12'
 
 env:
-  - GOOS=linux GOARCH=amd64
+  global:
+    - GOOS=linux
+    - GOARCH=amd64
 
 before_install:
   - go get github.com/gobuffalo/packr/packr
@@ -14,7 +16,7 @@ before_install:
   - yarn install
 
 script:
-  - make
+  - GOFLAGS='-v -a' make
 
 deploy:
   provider: releases

@@ -1,16 +1,21 @@
 FONTS := $(wildcard node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-*)
+STATIC := static/index.html static/style.css static/site.js static/logo.png static/fonts
+PACKR := a_main-packr.go
+
+SRC := umverteiler-web.go
+BIN := umverteiler-web
 
 .PHONY: all
-all: umverteiler-web
+all: $(BIN)
 
-umverteiler-web: umverteiler-web.go a_main-packr.go
-	go build -v -a -o $@ $^
+$(BIN): $(SRC) $(PACKR)
+	go build -o $@ $^
 
-a_main-packr.go: static
+$(PACKR): $(SRC) $(STATIC)
 	packr
 
 .PHONY: static
-static: static/index.html static/style.css static/site.js static/logo.png static/fonts
+static: $(STATIC)
 
 static/index.html: src/index.slim
 	bundle exec slimrb $^ > $@
@@ -27,3 +32,7 @@ static/logo.png: src/logo.png
 static/fonts: $(FONTS)
 	mkdir -p $@
 	cp $^ $@
+
+.PHONY: clean
+clean:
+	rm -rf $(STATIC) $(PACKR) $(BIN)
