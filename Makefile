@@ -21,10 +21,10 @@ static/index.html: src/index.slim
 	bundle exec slimrb $^ > $@
 
 static/style.css: src/style.sass
-	bundle exec sass -t compressed $^ > $@
+	yarn sass -s compressed --no-source-map $^ $@
 
 static/site.js: src/site.js
-	./node_modules/.bin/uglifyjs -c -m -o $@ $^
+	yarn uglifyjs -c -m -o $@ $^
 
 static/logo.png: src/logo.png
 	cp $^ $@
