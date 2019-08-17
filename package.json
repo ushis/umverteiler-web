@@ -8,6 +8,8 @@
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.10.1",
     "bulma": "^0.7.5",
+    "pug": "^2.0.4",
+    "pug-cli": "^1.0.0-alpha6",
     "sass": "^1.22.9",
     "uglify-js": "^3.6.0",
     "watch": "^1.0.2"

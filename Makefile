@@ -22,8 +22,8 @@ $(BIN): $(SRC) $(PACKR)
 $(PACKR): $(SRC) $(STATIC)
 	packr
 
-$(STATIC_BIN_DIR)/%.html: $(STATIC_SRC_DIR)/%.slim | $(STATIC_BIN_DIR)
-	bundle exec slimrb $^ > $@
+$(STATIC_BIN_DIR)/%.html: $(STATIC_SRC_DIR)/%.pug | $(STATIC_BIN_DIR)
+	yarn pug $^ -o $(@D)
 
 $(STATIC_BIN_DIR)/%.css: $(STATIC_SRC_DIR)/%.sass | $(STATIC_BIN_DIR)
 	yarn sass -s compressed --no-source-map $^ $@
