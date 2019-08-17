@@ -12,7 +12,7 @@ before_install:
   - go get github.com/gobuffalo/packr/packr
   - go get -v -d -t .
   - gem install bundler
-  - bundle install --without guard
+  - bundle install
   - yarn install
 
 script:

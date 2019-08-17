@@ -1,10 +1,13 @@
 # binaries
 umverteiler-web
-static/*
+static
 !static/.keep
+!static/fonts/.keep
+
+# dependencies
+node_modules
 
 # tempfiles
-*-packr.go
 .sass-cache
-node_modules
+*-packr.go
 *.csv

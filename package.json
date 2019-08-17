@@ -2,10 +2,14 @@
   "name": "umverteiler-web",
   "version": "1.0.0",
   "license": "MIT",
+  "scripts": {
+    "watch": "watch make src"
+  },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.10.1",
     "bulma": "^0.7.5",
     "sass": "^1.22.9",
-    "uglify-js": "^3.6.0"
+    "uglify-js": "^3.6.0",
+    "watch": "^1.0.2"
   }
 }

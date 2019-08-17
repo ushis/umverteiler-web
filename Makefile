@@ -1,5 +1,13 @@
-FONTS := $(wildcard node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-*)
-STATIC := static/index.html static/style.css static/site.js static/logo.png static/fonts
+STATIC_SRC_DIR := src
+STATIC_BIN_DIR := static
+
+FONTS_SRC_DIR := node_modules/@fortawesome/fontawesome-free/webfonts
+FONTS_BIN_DIR := $(STATIC_BIN_DIR)/fonts
+
+FONTS_SRC := $(wildcard $(FONTS_SRC_DIR)/fa-solid-*)
+FONTS_BIN := $(addprefix $(FONTS_BIN_DIR)/,$(notdir $(FONTS_SRC)))
+
+STATIC := $(addprefix $(STATIC_BIN_DIR)/,index.html style.css site.js logo.png) $(FONTS_BIN)
 PACKR := a_main-packr.go
 
 SRC := umverteiler-web.go
@@ -14,25 +22,27 @@ $(BIN): $(SRC) $(PACKR)
 $(PACKR): $(SRC) $(STATIC)
 	packr
 
-.PHONY: static
-static: $(STATIC)
-
-static/index.html: src/index.slim
+$(STATIC_BIN_DIR)/%.html: $(STATIC_SRC_DIR)/%.slim | $(STATIC_BIN_DIR)
 	bundle exec slimrb $^ > $@
 
-static/style.css: src/style.sass
+$(STATIC_BIN_DIR)/%.css: $(STATIC_SRC_DIR)/%.sass | $(STATIC_BIN_DIR)
 	yarn sass -s compressed --no-source-map $^ $@
 
-static/site.js: src/site.js
+$(STATIC_BIN_DIR)/%.js: $(STATIC_SRC_DIR)/%.js | $(STATIC_BIN_DIR)
 	yarn uglifyjs -c -m -o $@ $^
 
-static/logo.png: src/logo.png
+$(STATIC_BIN_DIR)/%.png: $(STATIC_SRC_DIR)/%.png | $(STATIC_BIN_DIR)
 	cp $^ $@
 
-static/fonts: $(FONTS)
-	mkdir -p $@
+$(FONTS_BIN_DIR)/%: $(FONTS_SRC_DIR)/% | $(FONTS_BIN_DIR)
 	cp $^ $@
+
+$(FONTS_BIN_DIR): | $(STATIC_BIN_DIR)
+	mkdir $@
+
+$(STATIC_BIN_DIR):
+	mkdir $@
 
 .PHONY: clean
 clean:
-	rm -rf $(STATIC) $(PACKR) $(BIN)
+	rm -rf $(STATIC_BIN_DIR) $(PACKR) $(BIN)
