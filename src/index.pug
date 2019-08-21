@@ -19,9 +19,13 @@ html
         .navbar-menu(id='navbar-menu')
           .navbar-start
             a.navbar-item(href='#how-to')
-              span.icon.has-text-info
+              span.icon.has-text-success
                 i.fas.fa-book
               span How To
+            a.navbar-item(href='#tips')
+              span.icon.has-text-info
+                i.fas.fa-info-circle
+              span Tips & Tricks
             a.navbar-item(href='#caveats')
               span.icon.has-text-warning
                 i.fas.fa-exclamation-triangle
@@ -165,6 +169,85 @@ html
               | könnt ihr euch auch einen Account anlegen und eure Einstellungen
               | selbst bearbeiten.
 
+            h2(id='tips')
+              | Tips & Tricks
+
+            h3
+              | Große Anhänge versenden
+
+            p
+              | Im Moment sind Emails, die über den Umverteiler versendet werden
+              | können, auf eine Größe von 1 MB beschränkt. Einerseits nutzen
+              | viele Umverteilende Postfächer mit beschränktem Speicherplatz,
+              | die verstopfen, wenn bergeweise Umverteilermails eintrudeln.
+              | Andererseits wollen viele Umverteilende ihr freigewordenes
+              | WG-Zimmer mit schönen Bildern bewerben. 1 MB erscheint uns als
+              | angemessener Kompromis.
+
+            p
+              | Emails, die größer sind als 1 MB, landen in der Moderation und
+              | werden in der Regel abgelehnt. Bei minimaler Überschreitung mit
+              | höchst relevanten Inhalten (lies: kreative Katzenbilder) werden
+              | auch mal Ausnahmen gemacht.
+
+            p
+              | Wenn ihr große Dateien teilen wollt ohne euch der Willkür der
+              | allmächtigen Moderation auszusetzen, ladet ihr diese am besten
+              | in einen der unzähligen Cloud Storage Dienste (Dropbox,
+              | Google Drive, iCloud, OneDrive, ...) und packt einen Link in
+              | eure Email.
+
+            h3
+              | Chaos im Postfach vermeiden
+
+            p
+              | Das Abonnement einer aktiven Mailingliste führt zwangsläufig zu
+              | mehr Emails im Postfach. Da kann es schnell chaotisch werden,
+              | wenn die wichtige Buchungsbestätigung irgendwo zwischen
+              | Mitfahrgelegenheitsanfragen und WG-Zimmer-Angeboten vergraben
+              | ist.
+
+            p
+              | Dieses Problem ist nicht neu und es gibt bereits ein Lösung:
+              | Email-Filter. Richtig konfiguriert können damit alle Umverteiler
+              | Emails in einen Unterordner eures Postfachs verschoben werden
+              | und stören nicht eure sonstige Kommunikation.
+
+            p
+              | So ziemlich alle Email-Provider stellen diese Funktion bereit.
+              | Hier ist eine Auswahl von Anleitungen:
+
+            ul
+              li
+                a(href='https://posteo.de/hilfe/wie-blockiere-ich-unerw%C3%BCnschte-absender-wie-erstelle-ich-eine-pers%C3%B6nliche-blacklist')
+                  | Posteo
+              li
+                a(href='https://riseup.net/de/email/settings/email-filters')
+                  | Riseup
+              li
+                a(href='https://support.google.com/mail/answer/6579')
+                  | Gmail
+              li
+                a(href='https://de.hilfe.yahoo.com/kb/SLN28071.html')
+                  | Yahoo
+              li
+                a(href='https://hilfe.gmx.net/email/filterregeln/index.html')
+                  | GMX
+              li
+                a(href='https://hilfe.web.de/email/filterregeln/index.html')
+                  | WEB.DE
+
+            p
+              | Menschen, die den Umverteiler erhalten wollen, aber nicht jede
+              | einzelne Email direkt zugestellt bekommen möchten, können eine
+              | tägliche Zusammenfassung bekommen. Dafür geht ihr auf die
+              |
+              a(href='https://lists.honkgong.info/')
+                | Weboberfläche der Listensoftware
+              | , registriert euch mit der Emailadresse, mit der ihr den
+              | Umverteiler abonniert habt und setzt die Einstellung
+              | <em>Delivery Mode</em> auf <em>Mime Digests</em>.
+
             h2(id='caveats')
               | Einschränkungen
 
@@ -184,12 +267,9 @@ html
               | . Mittels SPF können Mailserver feststellen, ob eine Email
               | von einem Mailserver der Domain-Inhaber*innen der angegeben
               | Absendeadresse kommt. Also ob die Email von
-              |
-              em ticket@deutschebahn.com
-              |
-              |wirklich von einem Server der Deutschen Bahn kommt.
-              | Das betrifft den Umverteiler, da er Emails im Namen
-              | Anderer, nämlich euch, versendet.
+              | <em>ticket@deutschebahn.com</em> wirklich von einem Server der
+              | Deutschen Bahn kommt. Das betrifft den Umverteiler, da er Emails
+              | im Namen Anderer, nämlich euch, versendet.
 
             p
               | Die zweite Technologie heißt
@@ -226,30 +306,21 @@ html
               | Domains des Unternehmens übernommen.
 
             p
-              strong
-                | Arrr, was heißt das denn jetzt?
-              |
+              | <strong>Arrr, was heißt das denn jetzt?</strong>
               | Emails von Yahoo, AOL und RocketMail Adressen an den
               | Umverteiler können nicht an alle Mitglieder zugestellt werden.
               | Auch ProtonMail Nutzer*innen sind betroffen.
 
             p
-              strong
-                | Arrr, wie grauenhaft. Was kann ich tun?
-              |
+              | <strong>Arrr, wie grauenhaft. Was kann ich tun?</strong>
               | Im Moment hilft leider nur der Wechsel des Emailproviders und
               | sei es nur für eure Umverteiler-Emails. Vielleicht ist das auch
               | guter Zeitpunkt sich mal mit den Datenschutznerds von
-              |
-              a(href='https://posteo.de/de')
-                | posteo.de
-              |
+              | <a href="https://posteo.de/de">posteo.de</a>
               | auseinanderzusetzen.
 
             p
-              strong
-                | Hmm, ok. Wie geht's weiter?
-              |
+              | <strong>Hmm, ok. Wie geht's weiter?</strong>
               | Es gibt eine neue Technologie am Horizont names
               |
               a(href='https://en.wikipedia.org/wiki/Authenticated_Received_Chain')
