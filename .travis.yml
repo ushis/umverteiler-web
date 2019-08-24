@@ -7,14 +7,19 @@ env:
   global:
     - GOOS=linux
     - GOARCH=amd64
+    - GO111MODULE=on
 
 before_install:
   - go get github.com/gobuffalo/packr/packr
-  - go get -v -d -t .
+  - go get -v -d ./...
   - yarn install
+  - npm install -g snyk
 
 script:
   - GOFLAGS='-v -a' make
+  - snyk auth "${SNYK_API_TOKEN}"
+  - snyk test --file=go.mod
+  - if test -n "${TRAVIS_TAG}"; then snyk monitor --file=go.mod; fi
 
 deploy:
   provider: releases
