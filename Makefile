@@ -22,8 +22,11 @@ $(BIN): $(SRC) $(PACKR)
 $(PACKR): $(SRC) $(STATIC)
 	packr
 
-$(STATIC_BIN_DIR)/%.html: $(STATIC_SRC_DIR)/%.pug | $(STATIC_BIN_DIR)
-	yarn pug $^ -o $(@D)
+$(STATIC_BIN_DIR)/index.html: $(STATIC_SRC_DIR)/index.pug $(STATIC_SRC_DIR)/logo.min.svg | $(STATIC_BIN_DIR)
+	yarn pug $< -o $(@D)
+
+$(STATIC_SRC_DIR)/%.min.svg: $(STATIC_SRC_DIR)/%.svg
+	yarn svgo $^ -o $@
 
 $(STATIC_BIN_DIR)/%.css: $(STATIC_SRC_DIR)/%.sass | $(STATIC_BIN_DIR)
 	yarn sass -s compressed --no-source-map $^ $@
@@ -42,4 +45,4 @@ $(STATIC_BIN_DIR):
 
 .PHONY: clean
 clean:
-	rm -rf $(STATIC_BIN_DIR) $(PACKR) $(BIN)
+	rm -rf $(STATIC_BIN_DIR) $(PACKR) $(BIN) $(STATIC_SRC_DIR)/*.min.svg
