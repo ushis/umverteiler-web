@@ -15,10 +15,10 @@ before_install:
 
 script:
   - GOFLAGS='-v -a' make
-  # snyk for go modules is broken at the moment
-  #- yarn run snyk auth "${SNYK_API_TOKEN}"
-  #- yarn run snyk test --file=go.mod
-  #- if test -n "${TRAVIS_TAG}"; then yarn run snyk monitor --file=go.mod; fi
+  - npm install -g snyk
+  - snyk auth "${SNYK_API_TOKEN}"
+  - snyk test --file=go.mod
+  - if test -n "${TRAVIS_TAG}"; then snyk monitor --file=go.mod; fi
 
 deploy:
   provider: releases
